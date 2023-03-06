@@ -45,16 +45,16 @@
 local lush = require('lush')
 local hsl = lush.hsl
 
-local dark0 = "#222222"
-local dark00 = "#333333"
-local dark01 = "#444444"
-local dark10 = "#555555"
-local dark11 = "#888888"
+local dark0 = "#222226"
+local dark00 = "#333337"
+local dark01 = "#444448"
+local dark10 = "#555559"
+local dark11 = "#888892"
 
-local light00 = "#eeeeee"
-local light01 = "#dddddd"
-local light10 = "#cccccc"
-local light11 = "#bbbbbb"
+local light00 = "#eeeeff"
+local light01 = "#ddddee"
+local light10 = "#ccccdd"
+local light11 = "#bbbbcc"
 
 local red = "#dd3322"
 local yellow = "#eecc00"
@@ -63,10 +63,8 @@ local blue = "#55bbff"
 local cyan = "#22aa99"
 local green = "#aaff88"
 local violet = "#99aaff"
-local magenta = "#dd3388"
-local lime = "#ccffaa"
 local light_blue = "#aaccee"
-local pink = "#dd88dd"
+local purple = "#dd88dd"
 
 local theme = lush(function()
   return {
@@ -82,7 +80,7 @@ local theme = lush(function()
     -- styling for that group (meaning they mostly get styled as Normal)
     -- or leave them commented to apply vims default colouring or linking.
 
-    Comment      { fg = hsl(dark11) }, -- any comment
+    Comment      { fg = hsl(dark11), gui = "italic" }, -- any comment
     ColorColumn  { bg = hsl(dark01) }, -- used for the columns set with 'colorcolumn'
     Conceal      { fg = hsl(light10) }, -- placeholder characters substituted for concealed text (see 'conceallevel')
     Cursor       { fg = hsl(dark00), bg = hsl(light01) }, -- character under the cursor
@@ -133,7 +131,7 @@ local theme = lush(function()
     TabLine      { bg = hsl(dark00) }, -- tab pages line, not active tab page label
     TabLineFill  { bg = hsl(dark00) }, -- tab pages line, where there are no labels
     TabLineSel   { bg = hsl(dark10) }, -- tab pages line, active tab page label
-    Title        { fg = hsl(magenta) }, -- titles for output from ":set all", ":autocmd" etc.
+    Title        { fg = hsl(purple) }, -- titles for output from ":set all", ":autocmd" etc.
     Visual       { bg = hsl(dark10) }, -- Visual mode selection
     VisualNOS    { bg = hsl(dark01) }, -- Visual mode selection when vim is "Not Owning the Selection".
     WarningMsg   { DiffText }, -- warning messages
@@ -146,12 +144,12 @@ local theme = lush(function()
     -- default,
     -- Uncomment and edit if you want more specific syntax highlighting.
 
-    Constant       { fg = hsl(cyan) }, -- (preferred) any constant
+    Constant       { fg = hsl(blue) }, -- (preferred) any constant
     String         { fg = hsl(green) }, --   a string constant: "this is a string"
     Character      { String }, --  a character constant: 'c', '\n'
-    Number         { fg = hsl(blue) }, --   a number constant: 234, 0xff
+    Number         { Constant }, --   a number constant: 234, 0xff
     Boolean        { Constant }, --  a boolean constant: TRUE, false
-    Float          { Number }, --    a floating point constant: 2.3e10
+    Float          { Constant }, --    a floating point constant: 2.3e10
 
     Identifier     { fg = hsl(light01) }, -- (preferred) any variable name
     Function       { fg = hsl(orange) }, -- function name (also: methods for classes)
@@ -164,7 +162,7 @@ local theme = lush(function()
     Keyword        { Statement }, --  any other keyword
     Exception      { Statement }, --  try, catch, throw
 
-    PreProc        { fg = hsl(lime) }, -- (preferred) generic Preprocessor
+    PreProc        { fg = hsl(purple) }, -- (preferred) generic Preprocessor
     Include        { PreProc }, --  preprocessor #include
     Define         { PreProc }, --   preprocessor #define
     Macro          { PreProc }, --    same as Define
@@ -175,12 +173,12 @@ local theme = lush(function()
     Structure      { Type }, --  struct, union, enum, etc.
     Typedef        { Type }, --  A typedef
 
-    Special        { fg = hsl(light00) }, -- (preferred) any special symbol
+    Special        { fg = hsl(green) }, -- (preferred) any special symbol
     SpecialChar    { Special }, --  special character in a constant
     Tag            { fg = hsl(yellow) }, --    you can use CTRL-] on this
     -- Delimiter      { bg = hsl("#88dd88") }, --  character that needs attention
     SpecialComment { fg = hsl(green) }, -- special things inside a comment
-    Debug          { fg = hsl(pink) }, --    debugging statements
+    Debug          { fg = hsl(purple) }, --    debugging statements
 
     Underlined { gui = "underline" }, -- (preferred) text that stands out, HTML links
     Bold       { gui = "bold" },
@@ -201,10 +199,10 @@ local theme = lush(function()
     -- LspReferenceRead                     { }, -- used for highlighting "read" references
     -- LspReferenceWrite                    { }, -- used for highlighting "write" references
 
-    LspDiagnosticsDefaultError           { fg = hsl(red), bg = hsl(dark00) }, -- Used as the base highlight group. Other LspDiagnostic highlights link to this by default (except Underline)
-    LspDiagnosticsDefaultWarning         { fg = hsl(orange), bg = hsl(dark00) }, -- Used as the base highlight group. Other LspDiagnostic highlights link to this by default (except Underline)
-    LspDiagnosticsDefaultInformation     { fg = hsl(light10), bg = hsl(dark00) }, -- Used as the base highlight group. Other LspDiagnostic highlights link to this by default (except Underline)
-    LspDiagnosticsDefaultHint            { fg = hsl(yellow), bg = hsl(dark00) }, -- Used as the base highlight group. Other LspDiagnostic highlights link to this by default (except Underline)
+    DiagnosticError           { fg = hsl(red), bg = hsl(dark00) }, -- Used as the base highlight group. Other LspDiagnostic highlights link to this by default (except Underline)
+    DiagnosticWarning         { fg = hsl(orange), bg = hsl(dark00) }, -- Used as the base highlight group. Other LspDiagnostic highlights link to this by default (except Underline)
+    DiagnosticInfo     { fg = hsl(light10), bg = hsl(dark00) }, -- Used as the base highlight group. Other LspDiagnostic highlights link to this by default (except Underline)
+    DiagnosticHint            { fg = hsl(yellow), bg = hsl(dark00) }, -- Used as the base highlight group. Other LspDiagnostic highlights link to this by default (except Underline)
 
     LspDiagnosticsVirtualTextError       { fg = hsl(red) }, -- Used for "Error" diagnostic virtual text
     LspDiagnosticsVirtualTextWarning     { fg = hsl(orange) }, -- Used for "Warning" diagnostic virtual text
@@ -289,7 +287,15 @@ local theme = lush(function()
     GitSignsAdd { bg = hsl(dark00), fg = hsl(green) },    -- lewis6991/gitsigns.nvim
     GitSignsChange { bg = hsl(dark00), fg = hsl(yellow) },    -- lewis6991/gitsigns.nvim
     GitSignsDelete { bg = hsl(dark00), fg = hsl(red) },    -- lewis6991/gitsigns.nvim
-
+    -- PyGamer0/rainbow_parentheses.vim
+    rainbowParensShell8 { fg = hsl(yellow) },
+    rainbowParensShell7 { fg = hsl(purple) },
+    rainbowParensShell6 { fg = hsl(blue) },
+    rainbowParensShell5 { fg = hsl(light_blue) },
+    rainbowParensShell4 { fg = hsl(cyan) },
+    rainbowParensShell3 { fg = hsl(green) },
+    rainbowParensShell2 { fg = hsl(orange) },
+    rainbowParensShell1 { fg = hsl(violet) },
   }
 end)
 
